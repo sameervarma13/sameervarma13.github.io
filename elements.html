@@ -72,6 +72,9 @@
 										For example the correlation between points scored and three pointers made rises steadily from 1980(0.1) to 1990(0.28) to
 										2000(0.45) to 2010(0.54) to 2015(0.65) where it then begins to level off. 
 									</p>
+									<p><span class="image left2"><img src="images/heat_1990.png" alt="" width = '430' /></span></p>
+									<p><span class="image right2"><img src="images/heat_2015.png" alt="" width = '430' /></span></p>
+									<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 									<hr />
 									<h2>Principal Component Analysis </h2>
 									<p> With 58 feature variables for each team it was important to determine which variables caused the largest
@@ -80,7 +83,7 @@
 										The resulting graphs showed that non-playoff teams were consistenly clustered quite well together and the 1st,2nd, and Conference Final
 										teams are reasonably well clustered together. Principal Component 1 captured a majority of the variance (43% and 40%)
 									</p>
-									<p></span><img src="images/pca.png" alt="" width = '1000'/></span></p>
+									<span class="image fit"><img src="images/pca.png" alt="" /></span>
 									<p><span class="image left"><img src="images/all_2d.png" alt="" /></span></p>
 									<p><span class="image right"><img src="images/all_3d.png" alt="" /></span></p>
 									<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -110,7 +113,60 @@
 										data point to all 5 cluster centroids. Finally the appropriate numberof data points, corresponding to the cluster size,
 										were assigned to each label by finding the data points with the shortest distance to the centroids. 
 									</p>
-									<hr />
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><img src="images/2006_dnqFirst.png" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/2006_dnqLast.png" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/2006_real.png" alt="" /></span></div>
+											<!-- Break -->
+											<div class="col-4"><span class="image fit"><img src="images/2010_dnqFirst.png" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/2010_dnqLast.png" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/2010_real.png" alt="" /></span></div>
+											<!-- Break -->
+											<div class="col-4"><span class="image fit"><img src="images/2015_dnqFirst.png" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/2015_dnqLast.png" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/2015_real.png" alt="" /></span></div>
+										</div>
+									</div>
+									<br /><br /><hr />
+									<h2>Conclusions/Results </h2>
+									<p>Three different classification models were used: KNN, Random Forest, and a manual Kmeans Cluster. 
+										Given that predicting every team as 'DNQ' would yield a ~46% accuracy, all the models scored quite low.
+										<br />
+										Here are the results from the various models:
+										<ul>
+											<li>KNN (Standard Data): 56% Mean Accuracy from 5 Fold Cross Validation</li>
+											<li>KNN (PCA Data): 55.7% Mean Accuracy from 5 Fold Cross Validation</li>
+											<li>Random Forest : 61% Mean Accuracy from 5 Fold Cross Validation</li>
+											<li>Manual Kmeans Cluster (DNQ First, Champion Last) : 58% Mean Accuracy from years 1996-2017</li>
+											<li>Manual Kmeans Cluster (DNQ Last, Champion First) : 45% Mean Accuracy from years 1996-2017</li>
+										</ul>
+										Here is the success rate of picking the correct champion for each year:
+										<ul>
+											<li>KNN (Standard Data): 8/38, 21%</li>
+											<li>KNN (PCA Data): 2/38, 5%</li>
+											<li>Random Forest: 5/38, 13%</li>
+											<li>Manual Kmeans Cluster (DNQ First, Champion Last) : 0/22, 0%</li>
+											<li>Manual Kmeans Cluster (DNQ Last, Champion First) : 14%</li>
+										</ul>
+										Here is an adjusted succes rate where the correct champion was picked or was labeled "Finals"
+										<ul>
+											<li>KNN (Standard Data): 11/38, 29%</li>
+											<li>KNN (PCA Data): 3/38, 8%</li>
+											<li>Random Forest: 12/38, 31.5%</li>
+											<li>Manual Kmeans Cluster (DNQ First, Champion Last): 1/22, 4.5%</li>
+											<li>Manual Kmeans Cluster (DNQ Last, Champion First) : 3/22, 14%</li>
+										</ul>
+										The Random Forest Classifer outperformed the other models slightly overall,
+										 but the KNN (Standard Data) model was the best at predicting the correct Champion. 
+										 Suprisingly the KNN Classifier trained and predicted on the Standard data performed better than whe used 
+										 on the PCA data. While the manual Kmeans Cluster (DNQ First) was more accurate than both KNN models overall, 
+										 it was the worst at predicting the champion. It actually got none correct. 
+										 The manual Kmeans Cluster (Champion First) performed the worst overall and expectedly performed 
+										 better at picking the Champion than Kmeans Cluster (DNQ First). 
+										 However, many of the incorrect labels given by Kmeans Cluster (Champion First) were 'DNQ', 
+										 which is as wrong a prediction as possible.
+									</p>
 									<br /><br /><hr />
 									<br />
 									<header class="major">
@@ -136,7 +192,7 @@
 									<hr />
 
 								<!-- Lists -->
-									<h2>Lists</h2>
+									<!-- <h2>Lists</h2>
 									<div class="row">
 										<div class="col-6 col-12-small">
 
@@ -156,8 +212,8 @@
 												<li>Dolor pulvinar etiam etiam.</li>
 											</ul>
 
-										</div>
-										<div class="col-6 col-12-small">
+										</div> -->
+										<!-- <div class="col-6 col-12-small">
 
 											<h3>Ordered</h3>
 											<ol>
@@ -187,8 +243,8 @@
 										</div>
 									</div>
 									<h3>Definition</h3>
-									<dl>
-										<dt>Item 1</dt>
+									<dl> -->
+										<!-- <dt>Item 1</dt>
 										<dd>
 											<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
 										</dd>
@@ -200,8 +256,8 @@
 										<dd>
 											<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
 										</dd>
-									</dl>
-
+									</dl> -->
+<!-- 
 									<h3>Actions</h3>
 									<ul class="actions">
 										<li><a href="#" class="button primary">Primary</a></li>
@@ -240,16 +296,16 @@
 										</div>
 									</div>
 
-									<hr />
+									<hr /> -->
 
 								<!-- Blockquote -->
-									<h2>Blockquote</h2>
+									<!-- <h2>Blockquote</h2>
 									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis.</blockquote>
 
-									<hr />
+									<hr /> -->
 
 								<!-- Table -->
-									<h2>Table</h2>
+									<!-- <h2>Table</h2>
 
 									<h3>Default</h3>
 									<div class="table-wrapper">
@@ -343,10 +399,10 @@
 										</table>
 									</div>
 
-									<hr />
+									<hr /> -->
 
 								<!-- Buttons -->
-									<h2>Buttons</h2>
+									<!-- <h2>Buttons</h2>
 									<ul class="actions">
 										<li><a href="#" class="button primary">Primary</a></li>
 										<li><a href="#" class="button">Default</a></li>
@@ -373,10 +429,10 @@
 										<li><span class="button disabled">Default</span></li>
 									</ul>
 
-									<hr />
+									<hr /> -->
 
 								<!-- Form -->
-									<h2>Form</h2>
+									<!-- <h2>Form</h2>
 
 									<form method="post" action="#">
 										<div class="row gtr-uniform">
@@ -385,9 +441,9 @@
 											</div>
 											<div class="col-6 col-12-xsmall">
 												<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
-											</div>
+											</div> -->
 											<!-- Break -->
-											<div class="col-12">
+											<!-- <div class="col-12">
 												<select name="demo-category" id="demo-category">
 													<option value="">- Category -</option>
 													<option value="1">Manufacturing</option>
@@ -395,9 +451,9 @@
 													<option value="1">Administration</option>
 													<option value="1">Human Resources</option>
 												</select>
-											</div>
+											</div> -->
 											<!-- Break -->
-											<div class="col-4 col-12-small">
+											<!-- <div class="col-4 col-12-small">
 												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
 												<label for="demo-priority-low">Low</label>
 											</div>
@@ -408,22 +464,22 @@
 											<div class="col-4 col-12-small">
 												<input type="radio" id="demo-priority-high" name="demo-priority">
 												<label for="demo-priority-high">High</label>
-											</div>
+											</div> -->
 											<!-- Break -->
-											<div class="col-6 col-12-small">
+											<!-- <div class="col-6 col-12-small">
 												<input type="checkbox" id="demo-copy" name="demo-copy">
 												<label for="demo-copy">Email me a copy</label>
 											</div>
 											<div class="col-6 col-12-small">
 												<input type="checkbox" id="demo-human" name="demo-human" checked>
 												<label for="demo-human">I am a human</label>
-											</div>
+											</div> -->
 											<!-- Break -->
-											<div class="col-12">
+											<!-- <div class="col-12">
 												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
+											</div> -->
 											<!-- Break -->
-											<div class="col-12">
+											<!-- <div class="col-12">
 												<ul class="actions">
 													<li><input type="submit" value="Send Message" class="primary" /></li>
 													<li><input type="reset" value="Reset" /></li>
@@ -432,10 +488,10 @@
 										</div>
 									</form>
 
-									<hr />
+									<hr /> -->
 
 								<!-- Image -->
-									<h2>Image</h2>
+									<!-- <h2>Image</h2>
 
 									<h3>Fit</h3>
 									<span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
@@ -443,13 +499,13 @@
 										<div class="row gtr-50 gtr-uniform">
 											<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
 											<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div> -->
 											<!-- Break -->
-											<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
+											<!-- <div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
 											<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div> -->
 											<!-- Break -->
-											<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
+											<!-- <div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
 											<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
 											<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
 										</div>
@@ -459,28 +515,28 @@
 									<p><span class="image left"><img src="images/pic08.jpg" alt="" /></span>Lorem ipsum dolor sit accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis.</p>
 									<p><span class="image right"><img src="images/pic09.jpg" alt="" /></span>Lorem ipsum dolor sit accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis.</p>
 
-									<hr />
+									<hr /> -->
 
 								<!-- Box -->
-									<h2>Box</h2>
+									<!-- <h2>Box</h2>
 									<div class="box">
 										<p>Felis sagittis eget tempus primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Magna sed etiam ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus lorem ipsum dolor sit amet nullam. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis volutpat lorem ipsum dolor.</p>
 									</div>
 
-									<hr />
+									<hr /> -->
 
 								<!-- Preformatted Code -->
-									<h2>Preformatted</h2>
-									<pre><code>i = 0;
+									<!-- <h2>Preformatted</h2>
+									<pre><code>i = 0; -->
 
-while (!deck.isInOrder()) {
+<!-- while (!deck.isInOrder()) {
     print 'Iteration ' + i;
     deck.shuffle();
     i++;
 }
 
 print 'It took ' + i + ' iterations to sort the deck.';
-</code></pre>
+</code></pre> -->
 
 							</section>
 
