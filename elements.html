@@ -28,6 +28,7 @@
 							<li><a href="index.html">Home</a></li>
 							<li><a href="generic.html">About</a></li>
 							<li class="active"><a href="elements.html">Portfolio</a></li>
+							<!-- <li><a href="music.html">Music</a></li> -->
 						</ul>
 						<ul class="icons">
 							<li><a href="#" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
@@ -169,16 +170,68 @@
 									</p>
 									<br /><br /><hr />
 									<br />
+									<div id = 'Enron' name = 'Enron'>
 									<header class="major">
 										<h1>Enron Email Analysis<br />
 										</h1>
 									</header>
-									<header>
-										<h2>Heading with a Subtitle</h2>
-										<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-									</header>
-									<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-									<header>
+										<h2>Goal</h2>
+										<p>Complete an exploratory analysis for the Enron email dataset to identify a intersting
+											trends in the data.
+										</p>
+										<hr />
+										<h2>Data Cleaning</h2>
+									<p> The enron email dataset was downloaded from kaggle as a csv file. The raw data consisted of a file columns
+										and a message column. The message field contained all the neccessary information about each email such as the sender,
+										recipient, time, and actual message content. The best way to store all information appropriately would be to have a column
+										for each field (from, to, date, message, cc, etc.). Because of the original message column containing all the information
+										was in the form of a key value pair, the keys were extracted as the main fields and the value was the appropriate value for 
+										each field. Thus a final dataframe was created with the keys being the new column headers and the values being the associated rows.
+										Finally the 'Date' column was converted to a Datetime object for later analysis.
+									</p>
+									<hr />
+									<h2>Initial Analysis</h2>
+									<p> The first step was to observe the emails addressess contributing most to the dataset. To do this, the email addresses found most frequently
+										in the 'From' column and the 'To' column were identified. These emails or would be those who sent and received the most emails.
+									</p>
+									<p><span class="image left2"><img src="images/from.png" alt="" width = '400' /></span></p>
+									<p><span class="image right2"><img src="images/to.png" alt="" width = '400' /></span></p>
+									<br /><br /><br /><br /><br /><br /><hr />
+										<h2>Date Analysis</h2>
+									<p> The first part of the exploratory analysis consisted of looking at who was sending and receiving 
+										the most emails. Because the 'Date' column was converted to a Datetime object in the cleaning process
+										the specific day of the week and date of each Datetime object could be extracted. To get the total emails sent
+										per day the rows were iterrated through and each corresponding day of the week was appropriately incremented. 
+										To find the average per day, it was important to the find the number of distinct Mondays, Tuesdays, etc. Then the total
+										from each day could be divided by the number of distinct days and finally plotted.
+									</p>
+									<p><span class="image left2"><img src="images/avg_perDay.png" alt="" width = '400' /></span></p>
+									<p><span class="image right2"><img src="images/total_perDay.png" alt="" width = '450' /></span></p>
+									<br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
+									<h2>Time Analysis</h2>
+									<p> The first part of the exploratory analysis consisted of looking at who was sending and receiving 
+										the most emails. Because the 'Date' column was converted to a Datetime object in the cleaning process
+										the specific day of the week and date of each Datetime object could be extracted. To get the total emails sent
+										per day the rows were iterrated through and each corresponding day of the week was appropriately incremented. 
+										To find the average per day, it was important to the find the number of distinct Mondays, Tuesdays, etc. Then the total
+										from each day could be divided by the number of distinct days and finally plotted.
+									</p>
+									<p><span class="image left2"><img src="images/avg_perHour.png" alt="" width = '400' /></span></p>
+									<p><span class="image right2"><img src="images/total_perHour.png" alt="" width = '450' /></span></p>
+									<br /><br /><br /><br /><br /><br />
+									<p><span class="image left2"><img src="images/kate.png" alt="" width = '430' /></span></p>
+									<p><span class="image right2"><img src="images/kay.png" alt="" width = '450' /></span></p>
+									<br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
+									<h2>Graph Analysis</h2>
+									<p> Because the email dataset consists of a 'from' and 'to' column one way to visually model the
+										data is through a graph, specifically an undirected a graph. Each node in the graph represents each email
+										address and the edges represent every email sent between various email addresses.
+									</p>
+									<p><span class="image left2"><img src="images/graph1.png" alt="" width = '440' /></span></p>
+									<p><span class="image right2"><img src="images/graph2.png" alt="" width = '450' /></span></p>
+									<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
+									</div>
+									<!-- <header>
 										<h3>Heading with a Subtitle</h3>
 										<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
 									</header>
@@ -189,7 +242,7 @@
 									</header>
 									<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
 
-									<hr />
+									<hr /> -->
 
 								<!-- Lists -->
 									<!-- <h2>Lists</h2>
