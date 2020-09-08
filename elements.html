@@ -235,6 +235,40 @@
 									<p><span class="image right2"><img src="images/graph2.png" alt="" width = '450' /></span></p>
 									<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
 									</div>
+									<div id = 'Tablut' name = 'Tablut'>
+										<header class="major">
+											<h1>Tablut Board Game<br />
+											</h1>
+										</header>
+											<h2>Goal</h2>
+											<p> Recreate the Tablut board game and create an AI to enable Human vs AI and AI vs AI functionality.
+											</p>
+											<hr />
+											<h2>Game Rules</h2>
+										<p> The objective of the white pieces is to get the King piece to the edge of the board.
+											The black pieces try to capture the king before it reaches the edge. The 16 black pieces 
+											start the game first. The white pieces, with the king at the center of the board, move next and 
+											the two sides alternate turns. All pieces move chess rooks, any number of squares vertically or horizontally.
+											No piece can occupy the same square as another piece and no piece can be 'jumped'. No piece other 
+											than the kind may land on the middle square. There are several conditions for capturing an enemy but 
+											the most common scenario occurs when an enemy's move results in the piece being enclosed on two opposite
+											sides. A king is captured like any other piece except for when it is on the center piece or any of the four
+											orthogonally adjacent squares. In this situation the king must be surrounded on all four sides by enemy pieces.							
+										</p>
+										<hr />
+										<h2>Game Design</h2>
+										<p> The first step of the project was to design the the board and the neccessary data structures to store the information
+											about the current state of the board, the pieces, and the possible moves. Then all the rules for the game were implemented.
+											The interesting part of the project was designing the AI agent. This was done by using the Minimax algorithm and 
+											alpha beta pruning. Essentially what happens is a the current state of the board is sent to a heursitic function
+											which returns a low score if the board is favorable to the black player and a high score if favorable to the 
+											white player. This heursitic function takes into account the location of the king and the number of pieces when 
+											determing the score of a move. If the move results in a win the score is set to a max score and vice versa.
+											Then a game tree is constucted such that the edges represent a move and the nodes represent the score
+											of that move. The depth of the tree is predetermined. When the depth has been reached or a node is a winning move
+											then the optimal move is selected. Using this algorithm, the AI is able to detect a win that is within 4 moves. 
+										</p>
+										<hr />
 									<!-- <header>
 										<h3>Heading with a Subtitle</h3>
 										<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
