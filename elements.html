@@ -1,694 +1,758 @@
 <!DOCTYPE HTML>
-<!--
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+  <!-- Google Fonts: Inter + Playfair Display -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500&display=swap"
+    rel="stylesheet"
+  />
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Portfolio</a>
-					</header>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="generic.html">About</a></li>
-							<li class="active"><a href="elements.html">Portfolio</a></li>
-							<!-- <li><a href="music.html">Music</a></li> -->
-						</ul>
-						<ul class="icons">
-							<li><a href="https://www.linkedin.com/in/sameer-varma/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
-							<li><a href="https://github.com/sameervarma13" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
-
-				<!-- Main -->
-					<div id="main">
-
-						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<h1>NBA Team Classifier<br />
-									</h1>
-								</header>
-
-								<!-- Text stuff -->
-									<h2>Goal</h2>
-									<!-- <p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>.
-									Finally, this is a <a href="#">link</a>.</p> -->
-									<p>Investigate what factors distinguish the successful teams 
-										in the NBA and to create model to predict playoff sucess.
-									</p>
-									<hr />
-									<h2>Data Collection </h2>
-									<p> Data was scraped from <a href = 'https://www.basketball-reference.com/'>basketball-reference.</a> 
-										Basic and advanced metric statistics were collected by scraping specific tables. The data was then 
-										cleaned so a single dataframe represented a single season where the columns were the various statistics,
-										and the rows were the 30 NBA teams. Initially, when working with data from only the past 10 years, the 
-										data was collected manually by downloading the tables and then merging them. Labeling the data with each team's
-										playoff result was particularly time consuming when done manually. However, eventually it became
-										clear that collecting data from several years past would be much more beneficial. Thus a scraper was implemented
-										to easily automate the process and allow for data collection from the last 50+ years.
-									</p>
-									<hr />
-									<h2>Initial Analysis </h2>
-									<p> There were 58 different statistics used to measure each team during each season. Correlation Heat Maps were constructed
-										to observe the relationships between the feature variables, as well as the change in correlation between features over time.
-										For example the correlation between points scored and three pointers made rises steadily from 1980(0.1) to 1990(0.28) to
-										2000(0.45) to 2010(0.54) to 2015(0.65) where it then begins to level off. 
-									</p>
-									<p><span class="image left2"><img src="images/heat_1990.png" alt="" width = '430' /></span></p>
-									<p><span class="image right2"><img src="images/heat_2015.png" alt="" width = '430' /></span></p>
-									<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-									<hr />
-									<h2>Principal Component Analysis </h2>
-									<p> With 58 feature variables for each team it was important to determine which variables caused the largest
-										variance between the different teams. In order to that principal component analysis (pca) was performed on the individual season
-										data and then later on groups of seasons. To visually observe each team data point both 2 and 3 principal components were used.
-										The resulting graphs showed that non-playoff teams were consistenly clustered quite well together and the 1st,2nd, and Conference Final
-										teams are reasonably well clustered together. Principal Component 1 captured a majority of the variance (43% and 40%)
-									</p>
-									<span class="image fit"><img src="images/pca.png" alt="" /></span>
-									<p><span class="image left"><img src="images/all_2d.png" alt="" /></span></p>
-									<p><span class="image right"><img src="images/all_3d.png" alt="" /></span></p>
-									<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-									<hr />
-									<h2>Model Building (K-Nearest Neighbors) </h2>
-									<p> Using K-Nearest Neighbors (knn), a classifier was used to predict the playoff results from the years 1980-2018.
-										For this classifier it was determined that 5 neighbors produced the optimal results.
-										The training data used was the original data with 58 features (not the PCA data). The training data consisted of
-										data from years 1980-2018. Then 5 fold cross validation was performed to assess the model's ability to successfully predict unseen data. 
-										The mean score from the cross validation was 56%. It is worth noting that predicting every team to be 'DNQ' would yield ~46% accuracy. 
-									 </p>
-									 <hr />
-									 <h2>Model Building (Random Forest) </h2>
-									<p> Next, a Random Forest classifier was used. Once again the training data used was the original data of 58 features
-										consiting of the years 1980-2018. 5 fold Cross Validation was perfomered again. The mean score here was slightly higher
-										at 61% and the most important feature in the classifier was SRS(margin of victory, adjusted for strength of schedule).
-									</p>
-									<hr />
-									<h2>Model Building (Manual Kmeans Cluster) </h2>
-									<p> What a noticed about the predictions from both the KNN and Random Forest classifiers was that certain labels were never
-										issued when predicting one or even two seasons worth of data. A majority of the data points were labeled as DNQ, 1st Round, 
-										or 2nd Round. Many times, a champion would never be predicted. When predicting a single season, it is known how many teams fall 
-										into each 'cluster'. There are 14 DNQs, 8 1st Rounds, 4 2nd Rounds, 2 Conference Finals, and 1 Champion. I wanted to take this 
-										into account. Using the PCA data from 1980-2018 consiting of 5 columns : PC1, PC2, PC3, Year, Playoff Result, I found the cluster
-										centroid for each of the labels (DNQ, 1st Round, etc.) When calculating this the test data was left out by drop the entries
-										belonging to a certain year. Then the test data was introduced and for each team data point, a distance was calculated from that
-										data point to all 5 cluster centroids. Finally the appropriate numberof data points, corresponding to the cluster size,
-										were assigned to each label by finding the data points with the shortest distance to the centroids. 
-									</p>
-									<figure>
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-4"><span class="image fit"><img src="images/2006_dnqFirst.png" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/2006_dnqLast.png" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/2006_real.png" alt="" /></span></div>
-											<!-- Break -->
-											<div class="col-4"><span class="image fit"><img src="images/2010_dnqFirst.png" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/2010_dnqLast.png" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/2010_real.png" alt="" /></span></div>
-											<!-- Break -->
-											<div class="col-4"><span class="image fit"><img src="images/2015_dnqFirst.png" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/2015_dnqLast.png" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/2015_real.png" alt="" /></span></div>
-										</div>
-									</div>
-									<figcaption>1st column: DNQ First Clustering, 2nd column: Champion First Clustering, 3rd column: Actual labels.
-										<br /> Each row represents a different season: 2006, 2010, 2015</figcaption>
-								</figure>
-									<br /><br /><hr />
-									<h2>Conclusions/Results </h2>
-									<p>Three different classification models were used: KNN, Random Forest, and a manual Kmeans Cluster. 
-										Given that predicting every team as 'DNQ' would yield a ~46% accuracy, all the models scored quite low.
-										<br />
-										Here are the results from the various models:
-										<ul>
-											<li>KNN (Standard Data): 56% Mean Accuracy from 5 Fold Cross Validation</li>
-											<li>KNN (PCA Data): 55.7% Mean Accuracy from 5 Fold Cross Validation</li>
-											<li>Random Forest : 61% Mean Accuracy from 5 Fold Cross Validation</li>
-											<li>Manual Kmeans Cluster (DNQ First, Champion Last) : 58% Mean Accuracy from years 1996-2017</li>
-											<li>Manual Kmeans Cluster (DNQ Last, Champion First) : 45% Mean Accuracy from years 1996-2017</li>
-										</ul>
-										Here is the success rate of picking the correct champion for each year:
-										<ul>
-											<li>KNN (Standard Data): 8/38, 21%</li>
-											<li>KNN (PCA Data): 2/38, 5%</li>
-											<li>Random Forest: 5/38, 13%</li>
-											<li>Manual Kmeans Cluster (DNQ First, Champion Last) : 0/22, 0%</li>
-											<li>Manual Kmeans Cluster (DNQ Last, Champion First) : 14%</li>
-										</ul>
-										Here is an adjusted succes rate where the correct champion was picked or was labeled "Finals"
-										<ul>
-											<li>KNN (Standard Data): 11/38, 29%</li>
-											<li>KNN (PCA Data): 3/38, 8%</li>
-											<li>Random Forest: 12/38, 31.5%</li>
-											<li>Manual Kmeans Cluster (DNQ First, Champion Last): 1/22, 4.5%</li>
-											<li>Manual Kmeans Cluster (DNQ Last, Champion First) : 3/22, 14%</li>
-										</ul>
-										The Random Forest Classifer outperformed the other models slightly overall,
-										 but the KNN (Standard Data) model was the best at predicting the correct Champion. 
-										 Suprisingly the KNN Classifier trained and predicted on the Standard data performed better than whe used 
-										 on the PCA data. While the manual Kmeans Cluster (DNQ First) was more accurate than both KNN models overall, 
-										 it was the worst at predicting the champion. It actually got none correct. 
-										 The manual Kmeans Cluster (Champion First) performed the worst overall and expectedly performed 
-										 better at picking the Champion than Kmeans Cluster (DNQ First). 
-										 However, many of the incorrect labels given by Kmeans Cluster (Champion First) were 'DNQ', 
-										 which is as wrong a prediction as possible.
-									</p>
-									<br /><br /><hr />
-									<br />
-									<div id = 'Enron' name = 'Enron'>
-									<header class="major">
-										<h1>Enron Email Analysis<br />
-										</h1>
-									</header>
-										<h2>Goal</h2>
-										<p>Complete an exploratory analysis for the Enron email dataset to identify a intersting
-											trends in the data.
-										</p>
-										<hr />
-										<h2>Data Cleaning</h2>
-									<p> The enron email dataset was downloaded from kaggle as a csv file. The raw data consisted of a file columns
-										and a message column. The message field contained all the neccessary information about each email such as the sender,
-										recipient, time, and actual message content. The best way to store all information appropriately would be to have a column
-										for each field (from, to, date, message, cc, etc.). Because of the original message column containing all the information
-										was in the form of a key value pair, the keys were extracted as the main fields and the value was the appropriate value for 
-										each field. Thus a final dataframe was created with the keys being the new column headers and the values being the associated rows.
-										Finally the 'Date' column was converted to a Datetime object for later analysis.
-									</p>
-									<hr />
-									<h2>Initial Analysis</h2>
-									<p> The first step was to observe the emails addressess contributing most to the dataset. To do this, the email addresses found most frequently
-										in the 'From' column and the 'To' column were identified. These emails or would be those who sent and received the most emails.
-									</p>
-									<p><span class="image left2"><img src="images/from.png" alt="" width = '400' /></span></p>
-									<p><span class="image right2"><img src="images/to.png" alt="" width = '400' /></span></p>
-									<br /><br /><br /><br /><br /><br /><hr />
-										<h2>Date Analysis</h2>
-									<p> The first part of the exploratory analysis consisted of looking at who was sending and receiving 
-										the most emails. Because the 'Date' column was converted to a Datetime object in the cleaning process
-										the specific day of the week and date of each Datetime object could be extracted. To get the total emails sent
-										per day the rows were iterrated through and each corresponding day of the week was appropriately incremented. 
-										To find the average per day, it was important to the find the number of distinct Mondays, Tuesdays, etc. Then the total
-										from each day could be divided by the number of distinct days and finally plotted.
-									</p>
-									<p><span class="image left2"><img src="images/avg_perDay.png" alt="" width = '400' /></span></p>
-									<p><span class="image right2"><img src="images/total_perDay.png" alt="" width = '450' /></span></p>
-									<br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
-									<h2>Time Analysis</h2>
-									<p> The first part of the exploratory analysis consisted of looking at who was sending and receiving 
-										the most emails. Because the 'Date' column was converted to a Datetime object in the cleaning process
-										the specific day of the week and date of each Datetime object could be extracted. To get the total emails sent
-										per day the rows were iterrated through and each corresponding day of the week was appropriately incremented. 
-										To find the average per day, it was important to the find the number of distinct Mondays, Tuesdays, etc. Then the total
-										from each day could be divided by the number of distinct days and finally plotted.
-									</p>
-									<p><span class="image left2"><img src="images/avg_perHour.png" alt="" width = '400' /></span></p>
-									<p><span class="image right2"><img src="images/total_perHour.png" alt="" width = '450' /></span></p>
-									<br /><br /><br /><br /><br /><br />
-									<p><span class="image left2"><img src="images/kate.png" alt="" width = '430' /></span></p>
-									<p><span class="image right2"><img src="images/kay.png" alt="" width = '450' /></span></p>
-									<br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
-									<h2>Graph Analysis</h2>
-									<p> Because the email dataset consists of a 'from' and 'to' column one way to visually model the
-										data is through a graph, specifically an undirected a graph. Each node in the graph represents each email
-										address and the edges represent every email sent between various email addresses.
-									</p>
-									<p><span class="image left2"><img src="images/graph1.png" alt="" width = '440' /></span></p>
-									<p><span class="image right2"><img src="images/graph2.png" alt="" width = '450' /></span></p>
-									<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
-									</div>
-									<div id = 'Tablut' name = 'Tablut'>
-										<header class="major">
-											<h1>Tablut Board Game<br />
-											</h1>
-										</header>
-											<h2>Goal</h2>
-											<p> Recreate the Tablut board game and create an AI to enable Human vs AI and AI vs AI functionality.
-											</p>
-											<hr />
-											<h2>Game Rules</h2>
-										<p> The objective of the white pieces is to get the King piece to the edge of the board.
-											The black pieces try to capture the king before it reaches the edge. The 16 black pieces 
-											start the game first. The white pieces, with the king at the center of the board, move next and 
-											the two sides alternate turns. All pieces move chess rooks, any number of squares vertically or horizontally.
-											No piece can occupy the same square as another piece and no piece can be 'jumped'. No piece other 
-											than the kind may land on the middle square. There are several conditions for capturing an enemy but 
-											the most common scenario occurs when an enemy's move results in the piece being enclosed on two opposite
-											sides. A king is captured like any other piece except for when it is on the center piece or any of the four
-											orthogonally adjacent squares. In this situation the king must be surrounded on all four sides by enemy pieces.							
-										</p>
-										<hr />
-										<h2>Game Design</h2>
-										<p> The first step of the project was to design the the board and the neccessary data structures to store the information
-											about the current state of the board, the pieces, and the possible moves. Then all the rules for the game were implemented.
-											The interesting part of the project was designing the AI agent. This was done by using the Minimax algorithm and 
-											alpha beta pruning. Essentially what happens is a the current state of the board is sent to a heursitic function
-											which returns a low score if the board is favorable to the black player and a high score if favorable to the 
-											white player. This heursitic function takes into account the location of the king and the number of pieces when 
-											determing the score of a move. If the move results in a win the score is set to a max score and vice versa.
-											Then a game tree is constucted such that the edges represent a move and the nodes represent the score
-											of that move. The depth of the tree is predetermined. When the depth has been reached or a node is a winning move
-											then the optimal move is selected. Using this algorithm, the AI is able to detect a win that is within 4 moves. 
-										</p>
-										<hr />
-									<!-- <header>
-										<h3>Heading with a Subtitle</h3>
-										<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-									</header>
-									<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-									<header>
-										<h4>Heading with a Subtitle</h4>
-										<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-									</header>
-									<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-
-									<hr /> -->
-
-								<!-- Lists -->
-									<!-- <h2>Lists</h2>
-									<div class="row">
-										<div class="col-6 col-12-small">
-
-											<h3>Unordered</h3>
-											<ul>
-												<li>Dolor pulvinar etiam.</li>
-												<li>Sagittis lorem eleifend.</li>
-												<li>Felis feugiat dolore viverra.</li>
-												<li>Dolor pulvinar etiam.</li>
-											</ul>
-
-											<h3>Alternate</h3>
-											<ul class="alt">
-												<li>Dolor pulvinar etiam etiam.</li>
-												<li>Sagittis adipiscing eleifend.</li>
-												<li>Felis enim dolore viverra.</li>
-												<li>Dolor pulvinar etiam etiam.</li>
-											</ul>
-
-										</div> -->
-										<!-- <div class="col-6 col-12-small">
-
-											<h3>Ordered</h3>
-											<ol>
-												<li>Dolor pulvinar etiam.</li>
-												<li>Etiam vel felis at viverra.</li>
-												<li>Felis enim feugiat magna.</li>
-												<li>Etiam vel felis nullam.</li>
-												<li>Felis enim et tempus.</li>
-											</ol>
-
-											<h3>Icons</h3>
-											<ul class="icons">
-												<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-												<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-												<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-												<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-												<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-											</ul>
-											<ul class="icons alt">
-												<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-												<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-												<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-												<li><a href="#" class="icon brands alt fa-github"><span class="label">Github</span></a></li>
-												<li><a href="#" class="icon brands alt fa-dribbble"><span class="label">Dribbble</span></a></li>
-											</ul>
-
-										</div>
-									</div>
-									<h3>Definition</h3>
-									<dl> -->
-										<!-- <dt>Item 1</dt>
-										<dd>
-											<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-										</dd>
-										<dt>Item 2</dt>
-										<dd>
-											<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-										</dd>
-										<dt>Item 3</dt>
-										<dd>
-											<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-										</dd>
-									</dl> -->
-<!-- 
-									<h3>Actions</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions small">
-										<li><a href="#" class="button primary small">Small</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<div class="row">
-										<div class="col-6 col-12-small">
-											<ul class="actions stacked">
-												<li><a href="#" class="button primary">Default</a></li>
-												<li><a href="#" class="button">Default</a></li>
-											</ul>
-										</div>
-										<div class="col-6 col-12-small">
-											<ul class="actions stacked">
-												<li><a href="#" class="button primary small">Small</a></li>
-												<li><a href="#" class="button small">Small</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-6 col-12-small">
-											<ul class="actions stacked">
-												<li><a href="#" class="button primary fit">Default</a></li>
-												<li><a href="#" class="button fit">Default</a></li>
-											</ul>
-										</div>
-										<div class="col-6 col-12-small">
-											<ul class="actions stacked">
-												<li><a href="#" class="button primary small fit">Small</a></li>
-												<li><a href="#" class="button small fit">Small</a></li>
-											</ul>
-										</div>
-									</div>
-
-									<hr /> -->
-
-								<!-- Blockquote -->
-									<!-- <h2>Blockquote</h2>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis.</blockquote>
-
-									<hr /> -->
-
-								<!-- Table -->
-									<!-- <h2>Table</h2>
-
-									<h3>Default</h3>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item 1</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item 2</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item 3</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item 4</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item 5</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<h3>Alternate</h3>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item 1</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item 2</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item 3</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item 4</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item 5</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<hr /> -->
-
-								<!-- Buttons -->
-									<!-- <h2>Buttons</h2>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary large">Large</a></li>
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions fit">
-										<li><a href="#" class="button primary fit">Fit</a></li>
-										<li><a href="#" class="button fit">Fit</a></li>
-									</ul>
-									<ul class="actions fit small">
-										<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-										<li><a href="#" class="button fit small">Fit + Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-search">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Primary</span></li>
-										<li><span class="button disabled">Default</span></li>
-									</ul>
-
-									<hr /> -->
-
-								<!-- Form -->
-									<!-- <h2>Form</h2>
-
-									<form method="post" action="#">
-										<div class="row gtr-uniform">
-											<div class="col-6 col-12-xsmall">
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-											</div>
-											<div class="col-6 col-12-xsmall">
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
-											</div> -->
-											<!-- Break -->
-											<!-- <div class="col-12">
-												<select name="demo-category" id="demo-category">
-													<option value="">- Category -</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div> -->
-											<!-- Break -->
-											<!-- <div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-normal" name="demo-priority">
-												<label for="demo-priority-normal">Normal</label>
-											</div>
-											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div> -->
-											<!-- Break -->
-											<!-- <div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">I am a human</label>
-											</div> -->
-											<!-- Break -->
-											<!-- <div class="col-12">
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div> -->
-											<!-- Break -->
-											<!-- <div class="col-12">
-												<ul class="actions">
-													<li><input type="submit" value="Send Message" class="primary" /></li>
-													<li><input type="reset" value="Reset" /></li>
-												</ul>
-											</div>
-										</div>
-									</form>
-
-									<hr /> -->
-
-								<!-- Image -->
-									<!-- <h2>Image</h2>
-
-									<h3>Fit</h3>
-									<span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div> -->
-											<!-- Break -->
-											<!-- <div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div> -->
-											<!-- Break -->
-											<!-- <div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-										</div>
-									</div>
-
-									<h3>Left &amp; Right</h3>
-									<p><span class="image left"><img src="images/pic08.jpg" alt="" /></span>Lorem ipsum dolor sit accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis.</p>
-									<p><span class="image right"><img src="images/pic09.jpg" alt="" /></span>Lorem ipsum dolor sit accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis.</p>
-
-									<hr /> -->
-
-								<!-- Box -->
-									<!-- <h2>Box</h2>
-									<div class="box">
-										<p>Felis sagittis eget tempus primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Magna sed etiam ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus lorem ipsum dolor sit amet nullam. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis volutpat lorem ipsum dolor.</p>
-									</div>
-
-									<hr /> -->
-
-								<!-- Preformatted Code -->
-									<!-- <h2>Preformatted</h2>
-									<pre><code>i = 0; -->
-
-<!-- while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
+  <style>
+    /* ====== Base Styling (Matches the Homepage) ====== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: #1E2A39;
+    }
+    a {
+      color: #1E2A39;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    a:hover {
+      color: #7AAAD8;
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+    hr {
+      margin: 2rem 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+	/* ====== Portfolio Section Header Styling ====== */
+#portfolio-header {
+	background: #1E2A39;
+  color: white; /* White text */
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-print 'It took ' + i + ' iterations to sort the deck.';
-</code></pre> -->
+#portfolio-header .logo {
+  font-size: 1.8rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
-							</section>
+#portfolio-header nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
 
-					</div>
-<!-- Footer -->
-<footer id="footer">
-	<section>
-		<form method="post" action="#">
-			<div class="fields">
-				<div class="field">
-					<label for="name">Name</label>
-					<input type="text" name="name" id="name" />
-				</div>
-				<div class="field">
-					<label for="email">Email</label>
-					<input type="text" name="email" id="email" />
-				</div>
-				<div class="field">
-					<label for="message">Message</label>
-					<textarea name="message" id="message" rows="3"></textarea>
-				</div>
-			</div>
-			<ul class="actions">
-				<li><input type="submit" value="Send Message" /></li>
-			</ul>
-		</form>
-	</section>
-	<section class="split contact">
-		<section>
-			<h3>Phone</h3>
-			<p><a href="#">(408) 722-6247</a></p>
-		</section>
-		<section>
-			<h3>Email</h3>
-			<p><a href="#">sameervarma@berkeley.edu</a></p>
-		</section>
-		<section>
-			<h3>Social</h3>
-			<ul class="icons alt">
-				<li><a href="#" class="icon brands alt fa-linkedin"><span class="label">Linkedin</span></a></li>
-				<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-			</ul>
-		</section>
-	</section>
-</footer>
+#portfolio-header nav ul li {
+  display: inline-block;
+}
 
-<!-- Copyright -->
-<div id="copyright">
-	<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-</div>
+#portfolio-header nav ul li a {
+  color: white; /* White text for links */
+  font-weight: 600;
+  padding-bottom: 2px; /* For hover underline transition */
+}
 
-</div>
+#portfolio-header nav ul li a:hover {
+  color: #f4f4f4; /* Slightly lighter white on hover */
+  border-bottom: 2px solid #f4f4f4;
+}
 
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+#portfolio-header .active a {
+  border-bottom: 2px solid white;
+}
 
+    /* ====== Header & Navigation ====== */
+    header {
+  color: #1E2A39; /* Dark blue text color */
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #1E2A39; /* Add blue border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Keep the shadow for visual depth */
+  background: none; /* Ensure there's no background fill */
+}
+	
+    header .logo {
+      font-size: 1.8rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul li {
+      display: inline-block;
+    }
+    nav ul li a {
+      color: white;
+      font-weight: 600;
+      padding-bottom: 2px; /* for hover underline transition */
+    }
+    nav ul li a:hover {
+      color: #7AAAD8;
+      border-bottom: 2px solid #7AAAD8;
+    }
+    .active a {
+      border-bottom: 2px solid #7AAAD8;
+    }
+
+    /* ====== Main Content ====== */
+    #main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    .major h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    .major h1 br {
+      display: none; /* Hide forced line breaks in headings if desired */
+    }
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    	}
+    /* Float images with spacing (left2, right2, etc.) */
+	.image img {
+    max-width: 300px; /* Reduce image width */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center-align standalone images */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  	}
+  .image.left, .image.left2 {
+    float: left;
+    margin-right: 1rem;
+    max-width: 300px; /* Smaller width */
+  	}
+  .image.right, .image.right2 {
+    float: right;
+    margin-left: 1rem;
+    max-width: 300px; /* Smaller width */
+  	}
+
+    /* Clearfix for floated elements */
+    .post::after,
+    section::after,
+    .major::after,
+    .box.alt::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* ====== Footer ====== */
+    footer {
+      background: #1E2A39;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    footer a {
+      color: #7AAAD8;
+      font-weight: 600;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ====== Contact Form Styling ====== */
+    form {
+      margin-top: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .field label {
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      display: block;
+      color: #333;
+    }
+    .field input[type="text"],
+    .field textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: #333;
+    }
+    .field textarea {
+      resize: vertical;
+    }
+    .actions {
+      text-align: right;
+    }
+    .actions input[type="submit"] {
+      background: #1E2A39;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .actions input[type="submit"]:hover {
+      background: #7AAAD8;
+      transform: translateY(-3px);
+    }
+
+    /* ====== Additional Grid/Box styling from the new page ====== */
+    .box.alt .image {
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+
+<body class="is-preload">
+
+  <!-- Header -->
+  <header id="portfolio-header">
+	<div class="logo">Portfolio</div>
+	<nav id="portfolio-nav">
+	  <ul class="links">
+		<li><a href="index.html">Home</a></li>
+		<li><a href="generic.html">About</a></li>
+		<li class="active"><a href="elements.html">Portfolio</a></li>
+	  </ul>
+	</nav>
+  </header>
+
+  <!-- Main -->
+  <div id="main">
+
+    <!-- Post -->
+    <section class="post">
+      <header class="major">
+        <h1>NBA Team Classifier</h1>
+      </header> <br /><br />
+
+      <h2>Goal</h2>
+      <p>
+        Investigate what factors distinguish the successful teams in the NBA
+        and to create model to predict playoff success.
+      </p>
+      <hr />
+
+      <h2>Data Collection</h2>
+      <p>
+        Data was scraped from
+        <a href="https://www.basketball-reference.com/">
+          basketball-reference
+        </a>.
+        Basic and advanced metric statistics were collected by scraping specific
+        tables. The data was then cleaned so a single dataframe represented a
+        single season where the columns were the various statistics, and the
+        rows were the 30 NBA teams. Initially, when working with data from only
+        the past 10 years, the data was collected manually by downloading the
+        tables and then merging them. Labeling the data with each team's playoff
+        result was particularly time consuming when done manually. However,
+        eventually it became clear that collecting data from several years past
+        would be much more beneficial. Thus a scraper was implemented to easily
+        automate the process and allow for data collection from the last 50+
+        years.
+      </p>
+      <hr />
+
+      <h2>Initial Analysis</h2>
+      <p>
+        There were 58 different statistics used to measure each team during each
+        season. Correlation Heat Maps were constructed to observe the
+        relationships between the feature variables, as well as the change in
+        correlation between features over time. For example, the correlation
+        between points scored and three pointers made rises steadily from
+        1980(0.1) to 1990(0.28) to 2000(0.45) to 2010(0.54) to 2015(0.65) where
+        it then begins to level off.
+      </p>
+      <p>
+        <span class="image left2">
+          <img
+            src="images/heat_1990.png"
+            alt="NBA Heatmap 1990"
+            width="430"
+          />
+        </span>
+      </p>
+      <p>
+        <span class="image right2">
+          <img
+            src="images/heat_2015.png"
+            alt="NBA Heatmap 2015"
+            width="430"
+          />
+        </span>
+      </p>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <hr />
+
+      <h2>Principal Component Analysis</h2>
+      <p>
+        With 58 feature variables for each team it was important to determine
+        which variables caused the largest variance between the different teams.
+        In order to do that, principal component analysis (PCA) was performed on
+        the individual season data and then later on groups of seasons. To
+        visually observe each team data point both 2 and 3 principal components
+        were used. The resulting graphs showed that non-playoff teams were
+        consistently clustered quite well together and the 1st, 2nd, and
+        Conference Final teams are reasonably well clustered together. Principal
+        Component 1 captured a majority of the variance (43% and 40%).
+      </p>
+      <span class="image fit">
+        <img src="images/pca.png" alt="PCA chart" />
+      </span>
+      <p>
+        <span class="image left">
+          <img src="images/all_2d.png" alt="2D PCA" />
+        </span>
+      </p>
+      <p>
+        <span class="image right">
+          <img src="images/all_3d.png" alt="3D PCA" />
+        </span>
+      </p>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <hr />
+
+      <h2>Model Building (K-Nearest Neighbors)</h2>
+      <p>
+        Using K-Nearest Neighbors (KNN), a classifier was used to predict the
+        playoff results from the years 1980-2018. For this classifier it was
+        determined that 5 neighbors produced the optimal results. The training
+        data used was the original data with 58 features (not the PCA data). The
+        training data consisted of data from years 1980-2018. Then 5 fold cross
+        validation was performed to assess the model's ability to successfully
+        predict unseen data. The mean score from the cross validation was 56%.
+        It is worth noting that predicting every team to be 'DNQ' would yield
+        ~46% accuracy.
+      </p>
+      <hr />
+
+      <h2>Model Building (Random Forest)</h2>
+      <p>
+        Next, a Random Forest classifier was used. Once again, the training data
+        used was the original data of 58 features consisting of the years
+        1980-2018. 5 fold Cross Validation was performed again. The mean score
+        here was slightly higher at 61% and the most important feature in the
+        classifier was SRS (margin of victory, adjusted for strength of
+        schedule).
+      </p>
+      <hr />
+
+	  <h2>Model Building (Manual Kmeans Cluster)</h2>
+	  <p>
+		What I noticed about the predictions from both the KNN and Random Forest
+		classifiers was that certain labels were never issued when predicting
+		one or even two seasons worth of data. A majority of the data points
+		were labeled as DNQ, 1st Round, or 2nd Round. Many times, a champion
+		would never be predicted. When predicting a single season, it is known
+		how many teams fall into each 'cluster': 14 DNQs, 8 1st Rounds, 4 2nd
+		Rounds, 2 Conference Finals, and 1 Champion.
+	  </p>
+	  <p>
+		I wanted to take this into account. Using the PCA data from 1980-2018
+		consisting of 5 columns: PC1, PC2, PC3, Year, Playoff Result, I found
+		the cluster centroid for each of the labels (DNQ, 1st Round, etc.).
+		While calculating this, the test data was left out by dropping the
+		entries belonging to a certain year. Then the test data was introduced
+		and for each team data point, a distance was calculated from that data
+		point to all 5 cluster centroids. Finally, the appropriate number of data
+		points, corresponding to the cluster size, were assigned to each label
+		by finding the data points with the shortest distance to the centroids.
+	  </p>
+	  
+	  <!-- Updated Grid Layout for Images -->
+	  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 2rem 0;">
+		<div>
+		  <img src="images/2006_dnqFirst.png" alt="2006 DNQ First" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		</div>
+		<div>
+		  <img src="images/2006_dnqLast.png" alt="2006 DNQ Last" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		</div>
+		<div>
+		  <img src="images/2006_real.png" alt="2006 Real" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		</div>
+		<div>
+		  <img src="images/2010_dnqFirst.png" alt="2010 DNQ First" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		</div>
+		<div>
+		  <img src="images/2010_dnqLast.png" alt="2010 DNQ Last" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		</div>
+		<div>
+		  <img src="images/2010_real.png" alt="2010 Real" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		</div>
+		<div>
+		  <img src="images/2015_dnqFirst.png" alt="2015 DNQ First" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		</div>
+		<div>
+		  <img src="images/2015_dnqLast.png" alt="2015 DNQ Last" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		</div>
+		<div>
+		  <img src="images/2015_real.png" alt="2015 Real" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		</div>
+	  </div>
+	  
+        <figcaption>
+          1st column: DNQ First Clustering, 2nd column: Champion First
+          Clustering, 3rd column: Actual labels.
+          <br />
+          Each row represents a different season: 2006, 2010, 2015
+        </figcaption>
+      </figure>
+      <br /><br /><hr />
+
+	  <h2>Conclusions/Results</h2>
+	  <p>
+		Three different classification models were used: KNN, Random Forest, and a manual Kmeans Cluster. Given that predicting every team as 'DNQ' would yield a ~46% accuracy, all the models scored quite low.
+	  </p>
+	  
+	  <!-- Table for Results -->
+	  <h3>Results from Various Models</h3>
+	  <table style="width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 1.5rem;">
+		<thead>
+		  <tr>
+			<th style="padding: 0.5rem; border-bottom: 2px solid #ddd;">Model</th>
+			<th style="padding: 0.5rem; border-bottom: 2px solid #ddd;">Mean Accuracy</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">KNN (Standard Data)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">56%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">KNN (PCA Data)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">55.7%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Random Forest</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">61%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Manual Kmeans (DNQ First, Champion Last)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">58%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Manual Kmeans (DNQ Last, Champion First)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">45%</td>
+		  </tr>
+		</tbody>
+	  </table>
+	  
+	  <!-- Table for Success Rate -->
+	  <h3>Success Rate for Picking Correct Champion</h3>
+	  <table style="width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 1.5rem;">
+		<thead>
+		  <tr>
+			<th style="padding: 0.5rem; border-bottom: 2px solid #ddd;">Model</th>
+			<th style="padding: 0.5rem; border-bottom: 2px solid #ddd;">Success Rate</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">KNN (Standard Data)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">21%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">KNN (PCA Data)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">5%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Random Forest</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">13%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Manual Kmeans (DNQ First, Champion Last)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">0%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Manual Kmeans (DNQ Last, Champion First)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">14%</td>
+		  </tr>
+		</tbody>
+	  </table>
+	  
+	  <h3>Adjusted Success Rate (Correct Champion or "Finals")</h3>
+	  <table style="width: 100%; border-collapse: collapse; text-align: left;">
+		<thead>
+		  <tr>
+			<th style="padding: 0.5rem; border-bottom: 2px solid #ddd;">Model</th>
+			<th style="padding: 0.5rem; border-bottom: 2px solid #ddd;">Adjusted Success Rate</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">KNN (Standard Data)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">29%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">KNN (PCA Data)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">8%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Random Forest</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">31.5%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Manual Kmeans (DNQ First, Champion Last)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">4.5%</td>
+		  </tr>
+		  <tr>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Manual Kmeans (DNQ Last, Champion First)</td>
+			<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">14%</td>
+		  </tr>
+		</tbody>
+	  </table>
+	  <br /><br /><br /><br />
+	  <p>
+		The Random Forest Classifier outperformed the other models slightly overall, but the KNN (Standard Data) model was the best at predicting the correct Champion. Surprisingly, the KNN Classifier trained and predicted on the Standard data performed better than when used on the PCA data. While the manual Kmeans Cluster (DNQ First) was more accurate than both KNN models overall, it was the worst at predicting the champion. It actually got none correct. 
+	  </p>
+	  <p>
+		The manual Kmeans Cluster (Champion First) performed the worst overall and (expectedly) performed better at picking the Champion than Kmeans Cluster (DNQ First). However, many of the incorrect labels given by Kmeans Cluster (Champion First) were 'DNQ', which is as wrong a prediction as possible.
+	  </p>
+	  
+      <br /><br /><hr />
+      <br />
+
+      <!-- Enron Section -->
+      <div id="Enron" name="Enron">
+        <header class="major">
+          <h1>Enron Email Analysis</h1>
+        </header> <br /><br />
+        <h2>Goal</h2>
+        <p>
+          Complete an exploratory analysis for the Enron email dataset to
+          identify intersting trends in the data.
+        </p>
+        <hr />
+
+        <h2>Data Cleaning</h2>
+        <p>
+          The enron email dataset was downloaded from Kaggle as a CSV file. The
+          raw data consisted of a few columns and a message column. The message
+          field contained all the necessary information about each email such as
+          the sender, recipient, time, and actual message content. The best way
+          to store all information appropriately would be to have a column for
+          each field (from, to, date, message, cc, etc.). Because the original
+          message column containing all the information was in the form of a key
+          value pair, the keys were extracted as the main fields and the value
+          was the appropriate value for each field. Thus a final dataframe was
+          created with the keys being the new column headers and the values
+          being the associated rows. Finally the 'Date' column was converted to
+          a Datetime object for later analysis.
+        </p>
+        <hr />
+
+        <h2>Initial Analysis</h2>
+        <p>
+          The first step was to observe the emails addressess contributing most
+          to the dataset. To do this, the email addresses found most frequently
+          in the 'From' column and the 'To' column were identified. These emails
+          would be those who sent and received the most emails.
+        </p>
+        <p>
+          <span class="image left2"
+            ><img src="images/from.png" alt="" width="400"
+          /></span>
+        </p>
+        <p>
+          <span class="image right2"
+            ><img src="images/to.png" alt="" width="400"
+          /></span>
+        </p>
+        <br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><hr />
+
+        <h2>Date Analysis</h2>
+        <p>
+          The first part of the exploratory analysis consisted of looking at who
+          was sending and receiving the most emails. Because the 'Date' column
+          was converted to a Datetime object in the cleaning process, the
+          specific day of the week and date of each Datetime object could be
+          extracted. To get the total emails sent per day, the rows were
+          iterated through and each corresponding day of the week was
+          appropriately incremented. To find the average per day, it was
+          important to find the number of distinct Mondays, Tuesdays, etc. Then
+          the total from each day could be divided by the number of distinct
+          days and finally plotted.
+        </p>
+        <p>
+          <span class="image left2"
+            ><img src="images/avg_perDay.png" alt="" width="400"
+          /></span>
+        </p>
+        <p>
+          <span class="image right2"
+            ><img src="images/total_perDay.png" alt="" width="450"
+          /></span>
+        </p>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
+
+		<h2>Time Analysis</h2>
+		<p>
+		  The first part of the exploratory analysis consisted of looking at who
+		  was sending and receiving the most emails. Because the 'Date' column
+		  was converted to a Datetime object in the cleaning process, the
+		  specific day of the week and date of each Datetime object could be
+		  extracted. To get the total emails sent per day, the rows were
+		  iterated, and each corresponding day of the week was appropriately
+		  incremented. To find the average per day, it was important to find the
+		  number of distinct Mondays, Tuesdays, etc.
+		</p>
+		
+		<!-- Image Grid -->
+		<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem;">
+		  <div style="text-align: center;">
+			<img src="images/avg_perHour.png" alt="Average per Hour" 
+				 style="width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		  </div>
+		  <div style="text-align: center;">
+			<img src="images/total_perHour.png" alt="Total per Hour" 
+				 style="width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		  </div>
+		  <div style="text-align: center;">
+			<img src="images/kate.png" alt="Kate Analysis" 
+				 style="width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		  </div>
+		  <div style="text-align: center;">
+			<img src="images/kay.png" alt="Kay Analysis" 
+				 style="width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+		  </div>
+		</div>
+		
+        <hr />
+
+        <h2>Graph Analysis</h2>
+        <p>
+          Because the email dataset consists of a 'from' and 'to' column, one way
+          to visually model the data is through a graph, specifically an
+          undirected graph. Each node in the graph represents each email address
+          and the edges represent every email sent between various email
+          addresses.
+        </p>
+        <p>
+          <span class="image left2"
+            ><img src="images/graph1.png" alt="" width="440"
+          /></span>
+        </p>
+        <p>
+          <span class="image right2"
+            ><img src="images/graph2.png" alt="" width="450"
+          /></span>
+        </p>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <hr />
+      </div>
+
+      <!-- Tablut Section -->
+      <div id="Tablut" name="Tablut">
+        <header class="major">
+          <h1>Tablut Board Game</h1>
+        </header> <br /><br />
+        <h2>Goal</h2>
+        <p>
+          Recreate the Tablut board game and create an AI to enable Human vs AI
+          and AI vs AI functionality.
+        </p>
+        <hr />
+
+        <h2>Game Rules</h2>
+        <p>
+          The objective of the white pieces is to get the King piece to the edge
+          of the board. The black pieces try to capture the king before it
+          reaches the edge. The 16 black pieces start the game first. The white
+          pieces, with the king at the center of the board, move next and the
+          two sides alternate turns. All pieces move like chess rooks, any
+          number of squares vertically or horizontally. No piece can occupy the
+          same square as another piece and no piece can be 'jumped'. No piece
+          other than the king may land on the middle square. Capturing commonly
+          occurs by sandwiching an enemy piece on two opposite sides. The king
+          is captured like any other piece except for when it is on the center
+          piece or any of the four orthogonally adjacent squares. In this
+          situation the king must be surrounded on all four sides by enemy
+          pieces.
+        </p>
+        <hr />
+
+        <h2>Game Design</h2>
+        <p>
+          The first step of the project was to design the board and the
+          necessary data structures to store information about the current state
+          of the board, the pieces, and the possible moves. Then all the rules
+          for the game were implemented. The interesting part of the project was
+          designing the AI agent. This was done by using the Minimax algorithm
+          and alpha-beta pruning. Essentially, the current state of the board is
+          sent to a heuristic function which returns a low score if the board is
+          favorable to the black player and a high score if favorable to the
+          white player. This heuristic function takes into account the location
+          of the king and the number of pieces remaining. If the move results in
+          a win, the score is set to a maximum. A game tree is constructed where
+          edges represent moves and nodes represent the score. When the depth
+          limit is reached or a node is a winning move, the algorithm picks the
+          optimal path. Using this approach, the AI can detect a winning
+          sequence within a few moves.
+        </p>
+        <hr />
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+    <footer>
+		<p>Contact me: <a href="mailto:sameervarma@berkeley.edu">sameervarma@berkeley.edu</a></p>
+		<p>
+			<a href="https://www.linkedin.com/in/sameer-varma/">LinkedIn</a> | 
+			<a href="https://github.com/sameervarma13">GitHub</a>
+		</p>
+	</footer>
+
+ 
+ 
 </body>
 </html>

@@ -1,180 +1,214 @@
 <!DOCTYPE HTML>
-<!--
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Sameer Varma</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sameer Varma</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <style>
+        .button {
+    display: inline-block;
+    background-color: #1E2A39; /* Dark blue background */
+    color: white; /* White text */
+    padding: 0.6rem 1.2rem;
+    text-decoration: none; /* Remove underline */
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, transform 0.2s;
+}
 
-		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
-				<!-- Intro -->
-					<div id="intro">
-						<p> Hi! My name is Sameer Varma and I am currently an AI Engineer at IBM. <br />
-						</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-						</ul>
-					</div>
+.button:hover {
+    background-color: #7AAAD8; /* Lighter blue on hover */
+    transform: translateY(-2px); /* Lift effect */
+}
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #1E2A39;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header .logo {
+            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+        nav ul li a:hover {
+            color: #7AAAD8;
+            border-bottom: 2px solid #7AAAD8;
+        }
+        .intro {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, #E3E9F1, #f9f9f9);
+            color: #1E2A39;
+        }
+        .intro p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 0 auto 2rem;
+            max-width: 700px;
+            font-weight: 400;
+        }
+        .intro .button {
+            background: #1E2A39;
+            color: white;
+            padding: 0.6rem 1.4rem;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, transform 0.2s;
+        }
+        .intro .button:hover {
+            background: #7AAAD8;
+            transform: translateY(-3px);
+        }
+        .portfolio {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .portfolio h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1E2A39;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .project img {
+    width: 100%; /* Ensure image spans the full width of its container */
+    height: 200px; /* Fixed height for all images */
+    object-fit: cover; /* Ensure the image fills the space without distortion */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+        .project h3 {
+            margin: 1rem 0 0.5rem;
+            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            color: #1E2A39;
+        }
+        .project p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: #1E2A39;
+            color: white;
+            font-size: 0.95rem;
+        }
+        footer a {
+            color: #7AAAD8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    
+    </style>
+</head>
+<body>
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Go Bears!</a>
-					</header>
+<header>
+    <div class="logo">Sameer Varma</div>
+    <nav>
+        <ul>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="generic.html">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li class="active"><a href="index.html">Home</a></li>
-							<li><a href="generic.html">About</a></li>
-							<li><a href="elements.html">Portfolio</a></li>
-							<!-- <li><a href="music.html">Music</a></li> -->
+<section class="intro">
+    <p>Hi, my name is Sameer Varma, and I am an AI Engineer at IBM! In this role, I leverage my expertise in generative AI and large language models to build POCs and MVPs for clients within the Financial Services industry. As a UC Berkeley graduate with a BS in Mathematics and Statistics, I am passionate about creating powerful AI-driven solutions that make a real business impact.</p>
+    <a href="#portfolio" class="button">View My Work</a>
+</section>
 
-						</ul>
-						<ul class="icons">
-							<li><a href="https://www.linkedin.com/in/sameer-varma/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
-							<li><a href="https://github.com/sameervarma13" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+<section id="portfolio" class="portfolio">
+    <h2>Portfolio</h2>
+    <div class="projects">
+        <div class="project">
+            <img src="images/bball.jpg" alt="NBA Playoff Prediction Model">
+            <h3>NBA Playoff Prediction Model</h3>
+            <p>Developed a machine learning model analyzing 40 years of NBA data to predict playoff success.</p>
+            <a href="elements.html#NBA" class="button">Full Report</a>
+        </div>
+        <div class="project">
+            <img src="images/emails.jpg" alt="Enron Email Analysis">
+            <h3>Enron Email Analysis</h3>
+            <p>Network analysis of Enron emails using graph modeling to visualize trends and patterns.</p>
+            <a href="elements.html#Enron" class="button">Full Report</a>
+        </div>
+        <div class="project">
+            <img src="images/Tablut_board.png" alt="Tablut Board Game AI">
+            <h3>Tablut Board Game AI</h3>
+            <p>Designed an AI for this ancient game with Human vs AI and AI vs AI gameplay modes.</p>
+            <a href="elements.html#Tablut" class="button">Full Report</a>
+        </div>
+    </div>
+</section>
 
-				<!-- Main -->
-					<div id="main">
 
-						<!-- Featured Post -->
-							<article class="post featured">
-								<header class="major">
-									<span class="date">2021</span>
-									<h2><a href="#">NBA Playoff Prediction Model</a></h2>
-									<p>Scraped and cleaned online NBA team stats from past 40 years. Analyzed and visualized data
-										using K-means clustering and principal component analysis. Implemented and evaluated various classification 
-										algorithms like K-Nearest Neighbors and Random Forest. </p>
-								</header>
-								<!-- <a href="#" class="image main"><img src="images/me.jpg" alt=""/></a> -->
-								<ul class="actions special">
-									<li><a href="elements.html" class="button large">Portfolio</a></li>
-								</ul>
-							</article>
-						<!-- Posts -->
-							<section class="posts">
-								<article>
-									<header>
-										<span class="date">2020</span>
-										<h2><a href="elements.html#NBA">NBA Team<br />
-										Classification</a></h2>
-									</header>
-									<img src="images/bball.jpg" height = '300' alt="" /></a>
-									<p>Analyzed NBA team statistics from the past 40 years, performed clustering, dimension reductionality, and classification algorithms
-										 to develop a model for predicting team playoff success. </p>
-									<ul class="actions special">
-										<li><a href="elements.html#NBA" class="button">Full Report</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<span class="date">2020</span>
-										<h2><a href="elements.html#Enron">Enron Email<br />
-										Analysis</a></h2>
-									</header>
-									<img src="images/emails.jpg" height = '300' width = '450' alt="" /></a>
-									<p>Analyzed trends concerning when and to whom emails and modeled dataset with graphs using the NetworkX library.</p>
-									<ul class="actions special">
-										<li><a href="elements.html#Enron" class="button">Full Report</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<span class="date">2020</span>
-										<h2><a href="#">Tablut Board Game<br />
-										</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/Tablut_board.png" height = '300' width = '450' alt="" /></a>
-									<p>Recreated the ancient Noric and Celtic game, Tablut, in Java. Developed an AI for both sides to enable
-										Human vs AI and AI vs AI capabiities. 
-									</p>
-									<ul class="actions special">
-										<li><a href="elements.html#Tablut" class="button">Full Report</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<span class="date">2020</span>
-										<h2><a href="#">TBD<br />
-										</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Report</a></li>
-									</ul>
-								</article>
-							</section>
-						<!-- Footer -->
-					</div>
-				<!-- Footer -->
-					<footer id="footer">
-						<section>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-						</section>
-						<section class="split contact">
-							<section>
-								<h3>Phone</h3>
-								<p><a href="#">(408) 722-6247</a></p>
-							</section>
-							<section>
-								<h3>Email</h3>
-								<p><a href="#">sameervarma@berkeley.edu</a></p>
-							</section>
-							<section>
-								<h3>Social</h3>
-								<ul class="icons alt">
-									<li><a href="#" class="icon brands alt fa-linkedin"><span class="label">Linkedin</span></a></li>
-									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
+<footer id="contact">
+    <p>Contact me: <a href="mailto:sameervarma@berkeley.edu">sameervarma@berkeley.edu</a></p>
+    <p>
+        <a href="https://www.linkedin.com/in/sameer-varma/">LinkedIn</a> | 
+        <a href="https://github.com/sameervarma13">GitHub</a>
+    </p>
+</footer>
 
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+</body>
 </html>
